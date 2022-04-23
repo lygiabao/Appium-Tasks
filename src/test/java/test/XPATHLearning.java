@@ -9,7 +9,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class FormInteraction {
+import java.util.List;
+
+public class XPATHLearning {
     public static void main(String[] args) {
         // Get appium Driver
         AppiumDriver<MobileElement> driver = DriverFactory.getDriver(Platforms.android);
@@ -19,20 +21,15 @@ public class FormInteraction {
             MobileElement navLoginBtnElem = driver.findElement(MobileBy.AccessibilityId("Login"));
             navLoginBtnElem.click();
 
-            // Fill the form
-            MobileElement usernameElem = driver.findElement(MobileBy.AccessibilityId("input-email"));
-            MobileElement passwordElem = driver.findElement(MobileBy.AccessibilityId("input-password"));
-            MobileElement loginBthElm = driver.findElement(MobileBy.AccessibilityId("button-LOGIN"));
+            // Find all matching Elements
+            List<MobileElement> credInputFiled = driver.findElements(MobileBy.xpath("//android.widget.EditText"));
+            final int USERNAME_TEXTBOX = 0;
+            final int PASSWORD_TEXTBOX = 1;
+            credInputFiled.get(USERNAME_TEXTBOX).sendKeys("bao@gmail.com");
+            credInputFiled.get(PASSWORD_TEXTBOX).sendKeys("12345678");
 
-            usernameElem.sendKeys("a@gmail.com");
-            passwordElem.sendKeys("123456789");
-            loginBthElm.click();
-
-            // Get text from login dialog
-            WebDriverWait wait = new WebDriverWait(driver, 5L);
-            WebElement loginDialogTittle = wait.until(ExpectedConditions.visibilityOfElementLocated(MobileBy.id("android:id/message")));
-            System.out.println(loginDialogTittle.getText());
-
+            MobileElement loginButton = driver.findElement(MobileBy.AndroidUIAutomator("new UiSelector().textContains(\"When the device\")"));
+            System.out.println(loginButton.getText());
         } catch (Exception e){
             e.printStackTrace();
         } finally {

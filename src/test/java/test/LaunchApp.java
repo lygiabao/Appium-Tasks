@@ -23,13 +23,12 @@ public class LaunchApp {
             URL appiumServer = new URL("http://localhost:4723/wd/hub");
             appiumDriver = new AndroidDriver<MobileElement>(appiumServer, desiredCaps);
             Thread.sleep(3000);
-        } catch (Exception e){
+        } catch (Exception e) {
             exception = e;
         }
 
-        if(appiumDriver == null){
+        if (appiumDriver == null) {
             throw new RuntimeException(exception.getMessage());
         }
-
     }
 }
