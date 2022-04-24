@@ -1,4 +1,4 @@
-package test;
+package test.lesson_16;
 
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
